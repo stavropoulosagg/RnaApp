@@ -1,0 +1,73 @@
+{% extends "base.html"%}
+
+{%block content%}
+    <div>
+        <form method="POST" action"">
+            {{ form.hidden_tag() }} <!--for security reasons [CSRF TOKEN]-->
+            <fieldset class"form-group">
+                <legend class="border-bottom mb-4">Find RNA Pseudoknots</legend>
+                
+                <div class="form-group">
+                    {{ form.sequence.label(class="form-control-label") }} 
+                    <!-- error in form display-->
+                    {% if form.sequence.errors %}
+                        {{ form.sequence(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.sequence.errors%}
+                                <span>{{ error }}</span>
+                            {% endfor%}
+                        </div>
+                    {% else %}
+                        {{ form.sequence(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.option1.label(class="form-control-label") }}
+                    <!-- error in form display-->
+                    {% if form.option1.errors %}
+                        {{ form.option1(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.option1.errors%}
+                                <span>{{ error }}</span>
+                            {% endfor%}
+                        </div>
+                    {% else %}
+                        {{ form.option1(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.option2.label(class="form-control-label") }}
+                    <!-- error in form display-->
+                    {% if form.option2.errors %}
+                        {{ form.option2(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.option2.errors%}
+                                <span>{{ error }}</span>
+                            {% endfor%}
+                        </div>
+                    {% else %}
+                        {{ form.option2(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.option3.label(class="form-control-label") }}
+                    <!-- error in form display (is-invlaid class)-->
+                    {% if form.option3.errors %}
+                        {{ form.option3(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.option3.errors%}
+                                <span>{{ error }}</span>
+                            {% endfor%}
+                        </div>
+                    {% else %}
+                        {{ form.option3(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <p></p>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+{%endblock content%}

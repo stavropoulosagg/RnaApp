@@ -1,0 +1,44 @@
+{% extends "base.html"%}
+
+{%block content%}
+    <div class="media content-section border">
+        <div class="media-body">
+            <div class="border">
+                <img class="rounded-circle article-img" src="{{ url_for('static', filename='my_pics/' + run.author.image_file) }}">
+                <small class="text-muted">{{ run.date_time.strftime('%Y-%m-%d') }}</small>
+                <small class="text-muted">{{ run.author.email }}</small>
+                {% if run.author == current_user %}
+                    <div>
+                        <!--bootstrap: m=margin, mt=margin-top, mb=margin-bottom-->
+                        <!--button cause of confirm, instead of link-->
+                        <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+                    </div>
+                {% endif %}
+            </div>
+            <h2 class=article-title>{{ run.sequence }}</h2>
+            <p class="article-content">Option1={{ run.option1 }}</p>
+            <p class="article-content">Option2={{ run.option2 }}</p>
+            <p class="article-content">Option3={{ run.option2 }}</p>
+        </div>
+    </div>
+    <img src="{{ url_for('static', filename='my_pics/' + run.image_file) }}">
+
+    <!-- Bootstrap: (Live Demo) Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete this run?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                    <form action="{{ url_for('delete_run', run_id=run.id)}}" method="POST">
+                        <input class="btn btn-danger" type="submit" value="Delete">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{%endblock content%}
